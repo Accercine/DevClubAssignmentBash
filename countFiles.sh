@@ -1,8 +1,13 @@
 #!/bin/sh
-if [ $# -eq 2 ]
+if [[ ($# -eq 2 || $# -eq 1) && -d $1 && -r $1 ]]
 then
-  var=$( ls $1/*$2 | wc -l )
+  if [ $# -eq 2 ]
+  then
+    var=$( ls $1/*$2 | wc -l )
+  else
+    var=$( ls -p $1 | grep -v / | wc -l )
+  fi
+  echo $var
 else
-  var=$( ls -p $1 | grep -v / | wc -l )
+  exit -1
 fi
-echo $var
