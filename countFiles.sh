@@ -3,6 +3,6 @@ if [ $# -eq 2 ]
 then
   var=$( ls $1/*$2 | wc -l )
 else
-  var=$( ls $1/*.* | wc -l )
+  var=$( ls -p $1 | grep -v / | wc -l )
 fi
 echo $var
